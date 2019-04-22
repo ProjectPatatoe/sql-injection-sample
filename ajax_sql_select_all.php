@@ -24,24 +24,31 @@ $dbPDO = new PDO(	'pgsql:dbname='.$config['db_data'].
 								';user='.$config['db_user'].
 								';password='.$config['db_pass']
 								);
-$dbstmt = $dbPDO->query('
-                FOR i IN SELECT table_name
-                           FROM information_schema.tables
-                          WHERE table_schema = \'your_desired_schema\'
-                LOOP
-                    sql_string := sql_string || format($$
-                        -- some whitespace is mandatory here
-                        UNION
-                        SELECT name FROM %I
-                    $$,
-                    i.table_name);
-                END LOOP;
+if ($dbPDO)
+{
+	$dbstmt = $dbPDO->query('
+	                FOR i IN SELECT table_name
+	                           FROM information_schema.tables
+	                          WHERE table_schema = \'your_desired_schema\'
+	                LOOP
+	                    sql_string := sql_string || format($$
+	                        -- some whitespace is mandatory here
+	                        UNION
+	                        SELECT name FROM %I
+	                    $$,
+	                    i.table_name);
+	                END LOOP;
 
-                EXECUTE sql_string;
-                ');
-$results = $dbstmt->fetchAll(PDO::FETCH_ASSOC);
-$responsearr['status'] = $dbstmt->errorInfo();
-$responsearr['response'] = $results;
+	                EXECUTE sql_string;
+	                ');
+	$results = $dbstmt->fetchAll(PDO::FETCH_ASSOC);
+	$responsearr['status'] = $dbstmt->errorInfo();
+	$responsearr['response'] = $results;
+}
+else {
+	$responsearr['status'] = 0;
+	$responsearr['response'] = "PDO not connected";
+}
 if (isset($_POST['debug']))
     var_dump($responsearr);
 else {

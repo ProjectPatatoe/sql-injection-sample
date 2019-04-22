@@ -11,18 +11,25 @@ if (isset($_POST['input']))
     								';user='.$config['db_user'].
     								';password='.$config['db_pass']
     								);
-    $stmt = $dbPDO->prepare(" SELECT *
-                            WHERE somenumber=:input;");
-    $stmt->bindParam(':input',$_POST['input']);
-    if ($stmt->execute())
+    if ($dbPDO)
     {
-        $responsearr['status'] = 1;
-        $responsearr['response'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $dbPDO->prepare(" SELECT *
+                                WHERE somenumber=:input;");
+        $stmt->bindParam(':input',$_POST['input']);
+        if ($stmt->execute())
+        {
+            $responsearr['status'] = 1;
+            $responsearr['response'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        else {
+            $responsearr['status'] = 0;
+            $responsearr['response'] = "execute error!";
+        }
     }
     else {
-        $responsearr['status'] = 0;
-        $responsearr['response'] = "execute error!";
-    }
+            $responsearr['status'] = 0;
+            $responsearr['response'] = "PDO not connected";
+        }
 }
 else {
     $responsearr['status'] = 0;
