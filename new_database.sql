@@ -19,7 +19,7 @@ CREATE TABLE simple (
     rowid      serial       PRIMARY KEY,
     somenumber  integer     ,
     somestring  text
-)
+);
 INSERT INTO simple (somenumber,somestring) VALUES (123,"I Like cheese");
 INSERT INTO simple (somenumber,somestring) VALUES (345,"I Like potato");
 INSERT INTO simple (somenumber,somestring) VALUES (555555,"some credit card info");

@@ -37,6 +37,7 @@ if (isset($_POST['input']))
 if (isset($_GET['debug']))
     var_dump($responsearr);
 else {
+    header('Content-Type: application/json');
     echo json_encode($responsearr);
 }
  ?>

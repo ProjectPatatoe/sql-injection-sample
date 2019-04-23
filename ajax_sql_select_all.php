@@ -30,19 +30,9 @@ $dbPDO = new PDO(	'pgsql:dbname='.$config['db_data'].
 								,NULL,NULL,$opt);
 
 	$dbstmt = $dbPDO->query('
-	                FOR i IN SELECT table_name
-	                           FROM information_schema.tables
-	                          WHERE table_schema = \'public\'
-	                LOOP
-	                    sql_string := sql_string || format($$
-	                        -- some whitespace is mandatory here
-	                        UNION
-	                        SELECT name FROM %I
-	                    $$,
-	                    i.table_name);
-	                END LOOP;
-
-	                EXECUTE sql_string;
+                    SELECT table_schema,table_name
+                    FROM information_schema.tables
+                    ORDER BY table_schema,table_name;
 	                ');
 	$results = $dbstmt->fetchAll(PDO::FETCH_ASSOC);
 	$responsearr['status'] = $dbstmt->errorInfo();
@@ -52,6 +42,7 @@ $dbPDO = new PDO(	'pgsql:dbname='.$config['db_data'].
 if (isset($_POST['debug']))
     var_dump($responsearr);
 else {
+    header('Content-Type: application/json');
     echo json_encode($responsearr);
 }
  ?>
