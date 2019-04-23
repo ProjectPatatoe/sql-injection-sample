@@ -41,12 +41,10 @@ $dbPDO = new PDO(	'pgsql:dbname='.$config['db_data'].
 	$responsearr['status'] = $dbstmt->errorInfo();
 	$responsearr['response']['tablelist'] = $results;
 //table contents
-$dbstmt2 = $dbPDO->prepare('  SELECT *
-                              FROM :table;');
 for ($idx = 0; $idx < count($responsearr['response']['tablelist']);++$idx)
 {
-  $dbstmt2->execute(array(":table" => $responsearr['response']['tablelist'][$idx]['table_name']));
-  $responsearr['response']['tables'][ $responsearr['response']['tablelist']['table_name'] ] = $dbstmt2->fetchAll();
+  $dbstmt2 = $dbPDO->query('SELECT * FROM \"'.$responsearr['response']['tablelist'][$idx]['table_name'].'\";');
+  $responsearr['response']['tables'][ $responsearr['response']['tables']['table_name'] ] = $dbstmt2->fetchAll();
 }
 
 if (isset($_POST['debug']))
