@@ -48,7 +48,7 @@ for ($idx = 0; $idx < count($responsearr['response']['tablelist']);++$idx)
   $responsearr['response']['tables'][ $tablename ] = $dbstmt2->fetchAll();
 }
 
-if (isset($_POST['debug']))
+if (isset($_GET['debug']))
 {
     var_dump($results);
     var_dump($responsearr);
