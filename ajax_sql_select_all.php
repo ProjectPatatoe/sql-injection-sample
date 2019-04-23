@@ -45,7 +45,7 @@ $dbstmt2 = $dbPDO->prepare('  SELECT *
                               FROM ?;');
 for ($idx = 0; $idx < count($responsearr['response']['tablelist']);++$idx)
 {
-  $dbstmt2->execute(array($responsearr['response']['tablelist']['table_name']));
+  $dbstmt2->execute(array($responsearr['response']['tablelist'][$idx]['table_name']));
   $responsearr['response']['tables'][ $responsearr['response']['tablelist']['table_name'] ] = $dbstmt2->fetchAll();
 }
 
