@@ -20,8 +20,8 @@ CREATE TABLE simple (
     somenumber  integer     ,
     somestring  text
 );
-INSERT INTO simple (somenumber,somestring) VALUES (123,"I Like cheese");
-INSERT INTO simple (somenumber,somestring) VALUES (345,"I Like potato");
-INSERT INTO simple (somenumber,somestring) VALUES (555555,"some credit card info");
-INSERT INTO simple (somenumber,somestring) VALUES (935,"Lorem Ipsum");
-INSERT INTO simple (somenumber,somestring) VALUES (122,"some password");
+INSERT INTO simple (somenumber,somestring) VALUES (123,'I Like cheese');
+INSERT INTO simple (somenumber,somestring) VALUES (345,'I Like potato');
+INSERT INTO simple (somenumber,somestring) VALUES (555555,'some credit card info');
+INSERT INTO simple (somenumber,somestring) VALUES (935,'Lorem Ipsum');
+INSERT INTO simple (somenumber,somestring) VALUES (122,'some password');
