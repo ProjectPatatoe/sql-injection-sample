@@ -15,8 +15,9 @@ END LOOP;
 
 EXECUTE sql_string;
 */
-$responsearr['status'] = "";
-$responsearr['response'] = "";
+$responsearr['status'] = NULL;
+$responsearr['response']['tablelist'] = array();
+$responsearr['response']['tables'] = array();
 
 require_once('config.php');
 $opt = array(
@@ -49,7 +50,10 @@ for ($idx = 0; $idx < count($responsearr['response']['tablelist']);++$idx)
 }
 
 if (isset($_POST['debug']))
+{
+    var_dump($results);
     var_dump($responsearr);
+}
 else {
     header('Content-Type: application/json');
     echo json_encode($responsearr);
