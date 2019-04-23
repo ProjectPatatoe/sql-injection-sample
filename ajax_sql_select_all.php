@@ -30,9 +30,11 @@ $dbPDO = new PDO(	'pgsql:dbname='.$config['db_data'].
 								,NULL,NULL,$opt);
 
 	$dbstmt = $dbPDO->query('
-                    SELECT table_schema,table_name
-                    FROM information_schema.tables
-                    ORDER BY table_schema,table_name;
+                        SELECT *
+                      FROM information_schema.tables
+                      WHERE table_type = \'BASE TABLE\'
+                      AND table_schema = \'public\' 
+                      ORDER BY table_type, table_name
 	                ');
 	$results = $dbstmt->fetchAll(PDO::FETCH_ASSOC);
 	$responsearr['status'] = $dbstmt->errorInfo();
