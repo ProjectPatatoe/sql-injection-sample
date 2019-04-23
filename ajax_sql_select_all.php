@@ -43,7 +43,7 @@ $dbPDO = new PDO(	'pgsql:dbname='.$config['db_data'].
 //table contents
 for ($idx = 0; $idx < count($responsearr['response']['tablelist']);++$idx)
 {
-  $dbstmt2 = $dbPDO->query('SELECT * FROM \"'.$responsearr['response']['tablelist'][$idx]['table_name'].'\";');
+  $dbstmt2 = $dbPDO->query('SELECT * FROM '.$responsearr['response']['tablelist'][$idx]['table_name'].';');
   $responsearr['response']['tables'][ $responsearr['response']['tables']['table_name'] ] = $dbstmt2->fetchAll();
 }
 
