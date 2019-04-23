@@ -15,9 +15,8 @@ $dbPDO = new PDO(	'pgsql:dbname='.$config['db_data'].
 								';user='.$config['db_user'].
 								';password='.$config['db_pass']
 								,NULL,NULL,$opt);
-$dbstmt = $dbPDO->query(file_get_contents('new_database.sql'));
-$results = $dbstmt->fetchAll(PDO::FETCH_ASSOC);
-$responsearr['status'] = $dbstmt->errorInfo();
+$results = $dbPDO->exec(file_get_contents('new_database.sql'));
+$responsearr['status'] = $results;
 $responsearr['response'] = $results;
 if (isset($_GET['debug']))
     var_dump($responsearr);
