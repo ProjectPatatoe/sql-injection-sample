@@ -27,7 +27,7 @@ $dbPDO = new PDO(	'pgsql:dbname='.$config['db_data'].
 								';host='.$config['db_host'].
 								';user='.$config['db_user'].
 								';password='.$config['db_pass']
-								,$opt);
+								,NULL,NULL,$opt);
 
 	$dbstmt = $dbPDO->query('
 	                FOR i IN SELECT table_name

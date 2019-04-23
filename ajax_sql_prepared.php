@@ -14,7 +14,7 @@ if (isset($_POST['input']))
     								';host='.$config['db_host'].
     								';user='.$config['db_user'].
     								';password='.$config['db_pass']
-    								,$opt);
+    								,NULL,NULL,$opt);
 
         $stmt = $dbPDO->prepare(" SELECT *
                                 WHERE somenumber=:input;");
