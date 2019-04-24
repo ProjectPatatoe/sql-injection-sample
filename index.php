@@ -104,8 +104,10 @@
 		});
 		$("#resetdb").text("Reset Database");
   });//reset click
-  $("#showtables").click(function (e) {
+  $("#updatetables").click(function (e) {
+    $("#updatetables").attr('disabled',true);
     showtables();
+    $("#updatetables").attr('disabled',false);
   });//show tables click
   </script>
 </head>
@@ -148,6 +150,7 @@
   </div>
   <div>
     <h2>contents</h2>
+    <button id="updatetables">Update Tables</button>
     <div id="tablesdiv">
     </div>
   </div>
