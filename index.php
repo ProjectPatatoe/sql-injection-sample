@@ -10,25 +10,29 @@ $(document).ready(function() {
   function showtables()
   {
     $.ajax({
-			type: "POST",
+			type: "GET",
 			url: "ajax_sql_select_all.php",
 			success: function (rtndata) {
         for (var i = 0; i < rtndata.response.tables.length; ++i) {
           var table_name = Object.keys(rtndata.response.tables)[i];
+          console.log("table_name:" + table_name);
           //heading
           $("#tablesdiv").append('<h3>'+table_name+'</h3>');
           $("#tablesdiv").append('<table id="tables_'+table_name+'">');
           //thead
           $("#tablesdiv").append('<thead><tr>');
           for (var j = 0; j < rtndata.response.tables[i][0].length; j++) {
+            console.log("th");
             $("#tablesdiv").append('<th>'+Object.keys(rtndata.response.tables[i][0])[j]+'</th>');
           }
           $("#tablesdiv").append('</tr></thead>');
           //tbody
           $("#tablesdiv").append('<tbody>');
           for (var j = 0; j < rtndata.response.tables[i].length; j++) {
+            console.log("tr");
             $("#tablesdiv").append('<tr>');
             for (var k = 0; k < rtndata.response.tables[i][j].length; k++) {
+              console.log("td");
               $("#tablesdiv").append('<td>'+rtndata.response.tables[i][j][k]+'</td>');
             }
             $("#tablesdiv").append('</tr>');
@@ -36,8 +40,11 @@ $(document).ready(function() {
           $("#tablesdiv").append('</tbody>');
           //close
           $("#tablesdiv").append('</table>');
-        }
-		}//success
+        }//forloop table
+		},//success
+    failure: function(rtndata) {
+      //TODO
+    }
   });//ajax
 }//function showtables
   $("#submit").click(function(e) {
@@ -85,7 +92,7 @@ $(document).ready(function() {
     $("#resetdb").text( "Reseting...");
 		$("#resetdb").attr('disabled',true);
 		$.ajax({
-			type: "POST",
+			type: "GET",
 			url: "ajax_reset_database.php",
 			success: function (rtndata) {
 				if (rtndata.action == 1)
@@ -136,6 +143,7 @@ $(document).ready(function() {
   <div>
     <h2>reset</h2>
     <button id="resetdb">Reset Database</button>
+    <div id="resetdb_status"></div>
   </div>
   <div>
         Enter number to search:<textarea name="input" maxlength="500" cols="20" rows="5"></textarea>
@@ -150,12 +158,15 @@ $(document).ready(function() {
           </fieldset>
         <br>
         <button name="submit" value="Submit" id="submit">Submit</button>
+        <br>
+        <div id="submit_status"></div>
+        <div id="submit_response"></div>
   </div>
   <div>
     <h2>contents</h2>
     <button id="updatetables">Update Tables</button>
-    <div id="tablesdiv">
-    </div>
+    <div id="updatetables_status"></div>
+    <div id="tablesdiv">&nbsp;</div>
   </div>
 </body>
 </html>
