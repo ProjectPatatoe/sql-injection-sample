@@ -15,12 +15,12 @@
         for (var i = 0; i < rtndata.tables.length; ++i) {
           var table_name = Object.keys(rtndata.tables)[i];
           //heading
-          $("#tablesdiv").append('<h3>'.table_name.'</h3>');
-          $("#tablesdiv").append('<table id="tables_'.table_name.'">');
+          $("#tablesdiv").append('<h3>'+table_name+'</h3>');
+          $("#tablesdiv").append('<table id="tables_'+table_name+'">');
           //thead
           $("#tablesdiv").append('<thead><tr>');
           for (var j = 0; j < rtndata.tables[i][0].length; j++) {
-            $("#tablesdiv").append('<th>'.Object.keys(rtndata.tables[i][0])[j].'</th>');
+            $("#tablesdiv").append('<th>'+Object.keys(rtndata.tables[i][0])[j]+'</th>');
           }
           $("#tablesdiv").append('</tr></thead>');
           //tbody
@@ -28,7 +28,7 @@
           for (var j = 0; j < rtndata.tables[i].length; j++) {
             $("#tablesdiv").append('<tr>');
             for (var k = 0; k < rtndata.tables[i][j].length; k++) {
-              $("#tablesdiv").append('<td>'.rtndata.tables[i][j][k].'</td>');
+              $("#tablesdiv").append('<td>'+rtndata.tables[i][j][k]+'</td>');
             }
             $("#tablesdiv").append('</tr>');
           }
