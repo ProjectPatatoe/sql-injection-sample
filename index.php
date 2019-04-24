@@ -36,8 +36,9 @@
           //close
           $("#tablesdiv").append('</table>');
         }
-		});
-  }
+		}
+  });
+}
   $("#submit").click(function(e) {
     var submit_url = "";
     switch ($('input[name=protection]:checked').val() )
