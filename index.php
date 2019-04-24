@@ -9,28 +9,27 @@
 $(document).ready(function() {
   function showtables()
   {
-    alert("showtables");
     $.ajax({
 			type: "POST",
 			url: "ajax_sql_select_all.php",
 			success: function (rtndata) {
-        for (var i = 0; i < rtndata.tables.length; ++i) {
-          var table_name = Object.keys(rtndata.tables)[i];
+        for (var i = 0; i < rtndata.response.tables.length; ++i) {
+          var table_name = Object.keys(rtndata.response.tables)[i];
           //heading
           $("#tablesdiv").append('<h3>'+table_name+'</h3>');
           $("#tablesdiv").append('<table id="tables_'+table_name+'">');
           //thead
           $("#tablesdiv").append('<thead><tr>');
-          for (var j = 0; j < rtndata.tables[i][0].length; j++) {
-            $("#tablesdiv").append('<th>'+Object.keys(rtndata.tables[i][0])[j]+'</th>');
+          for (var j = 0; j < rtndata.response.tables[i][0].length; j++) {
+            $("#tablesdiv").append('<th>'+Object.keys(rtndata.response.tables[i][0])[j]+'</th>');
           }
           $("#tablesdiv").append('</tr></thead>');
           //tbody
           $("#tablesdiv").append('<tbody>');
-          for (var j = 0; j < rtndata.tables[i].length; j++) {
+          for (var j = 0; j < rtndata.response.tables[i].length; j++) {
             $("#tablesdiv").append('<tr>');
-            for (var k = 0; k < rtndata.tables[i][j].length; k++) {
-              $("#tablesdiv").append('<td>'+rtndata.tables[i][j][k]+'</td>');
+            for (var k = 0; k < rtndata.response.tables[i][j].length; k++) {
+              $("#tablesdiv").append('<td>'+rtndata.response.tables[i][j][k]+'</td>');
             }
             $("#tablesdiv").append('</tr>');
           }
@@ -71,7 +70,7 @@ $(document).ready(function() {
 				}
 				else
 				{
-					$("#submit_status").text('' + rtndata.data);
+					$("#submit_status").text('' + rtndata.response);
 					$("#submit").attr('disabled',false);
 				}
 			},//success
@@ -96,7 +95,7 @@ $(document).ready(function() {
 				}
 				else
 				{
-					$("#resetdb_status").text('' + rtndata.data);
+					$("#resetdb_status").text('' + rtndata.response);
 					$("#resetdb").attr('disabled',false);
 				}
 			},
@@ -108,7 +107,6 @@ $(document).ready(function() {
 		$("#resetdb").text("Reset Database");
   });//reset click
   $("#updatetables").click(function (e) {
-    alert("click");
     $("#updatetables").attr('disabled',true);
     showtables();
     $("#updatetables").attr('disabled',false);
