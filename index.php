@@ -6,8 +6,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <title>sql-injection-sample</title>
   <script>
+$(document).ready(function() {
   function showtables()
   {
+    alert("showtables");
     $.ajax({
 			type: "POST",
 			url: "ajax_sql_select_all.php",
@@ -36,9 +38,9 @@
           //close
           $("#tablesdiv").append('</table>');
         }
-		}
-  });
-}
+		}//success
+  });//ajax
+}//function showtables
   $("#submit").click(function(e) {
     var submit_url = "";
     switch ($('input[name=protection]:checked').val() )
@@ -55,7 +57,7 @@
       default:
         return;
         break;
-    }
+    }//switch
     $("#submit").text( "Submiting...");
 		$("#submit").attr('disabled',true);
 		$.ajax({
@@ -72,12 +74,12 @@
 					$("#submit_status").text('' + rtndata.data);
 					$("#submit").attr('disabled',false);
 				}
-			},
+			},//success
 			failure: function (rtndata) {
 				//$("#submit_status").text("Connection Error");
 				$("#submit").attr('disabled',false);
 			}
-		});
+		});//ajax
 		$("#submit").text("Submit");
   });//submit click
   $("#resetdb").click(function(e) {
@@ -106,10 +108,12 @@
 		$("#resetdb").text("Reset Database");
   });//reset click
   $("#updatetables").click(function (e) {
+    alert("click");
     $("#updatetables").attr('disabled',true);
     showtables();
     $("#updatetables").attr('disabled',false);
   });//show tables click
+});//doc ready
   </script>
 </head>
 <body>
